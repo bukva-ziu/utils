@@ -257,6 +257,12 @@ awful.spawn.easy_async_with_shell(nmappletcmd, function()
     awful.spawn.with_shell("echo 'nm-applet launch' >> /tmp/awesome_results")
 end)
 
+local initsh = "/home/km/init.sh"
+
+awful.spawn.easy_async_with_shell(initsh, function()
+    awful.spawn.with_shell("echo 'init.sh launch' >> /tmp/awesome_results")
+end)
+
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -355,7 +361,14 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+    
+    awful.key({ modkey }, "F6", function() os.execute("/bin/ts_lighter.sh") end,
+        {description = "lighter", group = "ts"}),
+    
+    awful.key({ modkey }, "F5", function() os.execute("/bin/ts_darker.sh") end,
+        {description = "darker", group = "ts"})
+
 )
 
 clientkeys = gears.table.join(
